@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Question } from '../question';
 import { CommonModule } from '@angular/common';
+import { QuestionService } from '../question.service';
 
 @Component({
   selector: 'app-question',
@@ -9,21 +10,20 @@ import { CommonModule } from '@angular/common';
   templateUrl: './question.component.html',
   styleUrl: './question.component.css',
 })
-export class QuestionComponent {
-  responseStatement: boolean = false;
+export class QuestionComponent implements OnInit {
+  questionList: Question[] | undefined;
 
-  question: Question = {
-    question: 'What is Frontend Mentor, and how will it help me?',
-    reply: `Frontend Mentor offers realistic coding challenges to help developers improve their frontend coding skills with projects in
-    HTML, CSS, and JavaScript. It's suitable for all levels and ideal for portfolio building.`,
-  };
+  constructor(private questionService: QuestionService) {}
 
-  updateResponseStatement(): void {
-    console.log('le bouton à été clicker');
-    if (this.responseStatement) {
-      this.responseStatement = false;
+  updateIsOpen(question: Question): void {
+    if (question.isOpen) {
+      question.isOpen = false;
     } else {
-      this.responseStatement = true;
+      question.isOpen = true;
     }
+  }
+
+  ngOnInit(): void {
+    this.questionList = this.questionService.getQuestionsList();
   }
 }
