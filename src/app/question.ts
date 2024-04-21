@@ -1,5 +1,5 @@
 export interface Question {
   question: string;
-  reply: string;
+  response: string;
   isOpen: boolean;
 }
