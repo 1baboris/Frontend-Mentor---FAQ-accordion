@@ -15,9 +15,9 @@ export const Questions: Question[] = [
   },
   {
     question: 'Can I use Frontend Mentor projects in my portfolio?',
-    isOpen: false,
     response:
       "Yes, you can use projects completed on Frontend Mentor in your portfolio. It's an excellent way to showcase your skills to potential employers!",
+    isOpen: false,
   },
   {
     question: "How can I get help if I'm stuck on a challenge?",

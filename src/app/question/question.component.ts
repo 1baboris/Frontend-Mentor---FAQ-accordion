@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { Question } from '../question';
 import { CommonModule } from '@angular/common';
 import { QuestionService } from '../question.service';
 import { Questions } from '../mock-questions-list';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-question',
@@ -18,6 +18,7 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.questionList = this.questionService.getQuestionsList();
+    document.addEventListener('keydown', this.onKeyDown.bind(this));
   }
 
   updateIsOpen(question: Question): void {
@@ -28,7 +29,7 @@ export class QuestionComponent implements OnInit {
     }
   }
 
-  selectedQuestionIndex: number = 0;
+  selectedQuestionIndex: number = -1;
 
   onKeyDown(event: KeyboardEvent) {
     switch (event.key) {
@@ -41,6 +42,9 @@ export class QuestionComponent implements OnInit {
       case ' ':
       case 'Enter':
         this.toggleAnswer();
+        break;
+      case 'Escape':
+        this.removeFocus();
         break;
     }
   }
@@ -63,5 +67,9 @@ export class QuestionComponent implements OnInit {
   toggleAnswer() {
     this.questionList[this.selectedQuestionIndex].isOpen =
       !this.questionList[this.selectedQuestionIndex].isOpen;
+  }
+
+  removeFocus() {
+    this.selectedQuestionIndex = -1; // ou une autre valeur qui n'existe pas dans la liste des questions
   }
 }

@@ -18,6 +18,9 @@ module.exports = {
         "bg-mobile": "url('./assets/images/background-pattern-mobile.svg')",
         "bg-desktop": "url('./assets/images/background-pattern-desktop.svg')",
       },
+      colors: {
+        highlighted: "#AD28EB",
+      },
     },
   },
   plugins: [],
